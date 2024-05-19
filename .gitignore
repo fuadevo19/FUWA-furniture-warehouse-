@@ -1,0 +1,5 @@
+#mengabaikan node_modules
+node_modules/
+
+#mengabaikan konfigurasi env
+.env
