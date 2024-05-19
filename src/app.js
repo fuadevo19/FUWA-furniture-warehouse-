@@ -1,4 +1,6 @@
 const express = require("express");
+require("dotenv").config();
+const PORT = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
 const authRoutes = require("./routes/auth");
 
@@ -13,6 +15,6 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.listen(4000, () => {
-  console.log("Server is running on port 4000");
+app.listen(PORT, () => {
+  console.log(`server berjalan di port ${PORT}`);
 });
