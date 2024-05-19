@@ -1,13 +1,26 @@
-const db = require("../config/db");
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define(
+    "users",
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    },
+    {
+      timestamps: false, // Menonaktifkan kolom createdAt dan updatedAt
+    }
+  );
 
-const findUserByUsername = (username, callback) => {
-  const query = "SELECT * FROM users WHERE username = ?";
-  db.query(query, [username], (err, results) => {
-    if (err) return callback(err, null);
-    return callback(null, results[0]);
-  });
-};
-
-module.exports = {
-  findUserByUsername,
+  return User;
 };
