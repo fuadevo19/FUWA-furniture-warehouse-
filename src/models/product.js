@@ -14,13 +14,12 @@ const Product = sequelize.define(
       allowNull: false,
     },
     description: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     sku: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     weight: {
       type: DataTypes.FLOAT,
@@ -37,6 +36,7 @@ const Product = sequelize.define(
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 0,
     },
   },
   {
