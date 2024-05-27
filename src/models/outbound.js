@@ -1,10 +1,12 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { Sequelize, DataTypes, UUIDV4 } = require("sequelize");
 const sequelize = require("../config/database");
 const Product = require("./product");
+const { v4: uuidv4 } = require("uuid");
 
 const Outbound = sequelize.define("Outbound", {
   date: {
-    type: DataTypes.DATE,
+    type: DataTypes.UUID,
+    defaultValue: uuidv4,
     allowNull: false,
     defaultValue: Sequelize.NOW,
   },

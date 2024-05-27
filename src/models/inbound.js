@@ -1,12 +1,14 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { Sequelize, DataTypes, UUIDV4 } = require("sequelize");
 const sequelize = require("../config/database");
 const Product = require("./product");
+const { v4: uuidv4 } = require("uuid");
 
 const Inbound = sequelize.define(
   "Inbound",
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: uuidv4,
       primaryKey: true,
       autoIncrement: true,
     },
