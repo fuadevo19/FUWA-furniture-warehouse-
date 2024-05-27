@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const sequelize = require("./config/database");
 const db = require("./models");
 const authRoutes = require("./routes/authRoutes");
@@ -8,7 +9,7 @@ const inboundRoutes = require("./routes/inboundRoutes");
 const outboundRoutes = require("./routes/outboundRoutes");
 
 const app = express();
-
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use("/auth", authRoutes);
