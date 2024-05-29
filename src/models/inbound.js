@@ -1,43 +1,54 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 const Product = require("./product");
 
-const Inbound = sequelize.define(
-  "Inbound",
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    product_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: Product,
-        key: "id",
-      },
-    },
-    quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    reference_number: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    date: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.NOW,
-    },
+const Inbound = sequelize.define("Inbound", {
+  datetime: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
   },
-  {
-    freezeTableName: true,
-  }
-);
+  reference_number: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  supplier_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+});
 
-Product.hasMany(Inbound, { foreignKey: "product_id" });
-Inbound.belongsTo(Product, { foreignKey: "product_id" });
+const InboundProduct = sequelize.define("InboundProducts", {
+  quantity: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  description: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  sku: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  size: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  weight: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  zone: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+});
 
-module.exports = Inbound;
+Inbound.belongsToMany(Product, { through: InboundProduct });
+Product.belongsToMany(Inbound, { through: InboundProduct });
+
+module.exports = { Inbound, InboundProduct };
