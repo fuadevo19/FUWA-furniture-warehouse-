@@ -5,7 +5,7 @@ const authenticate = require("../middlewares/auth");
 
 router.get("/products", authenticate, productController.getAllProducts);
 router.post("/products", authenticate, productController.addProduct);
-router.get("/products/:id", productController.getProductById);
+router.get("/products/:id", authenticate, productController.getProductById);
 router.put("/products/:id", productController.updateProduct);
 router.delete("/products/:id", productController.deleteProduct);
 
