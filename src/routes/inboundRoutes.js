@@ -1,11 +1,5 @@
 const express = require("express");
-const {
-  createInbound,
-  getAllInbounds,
-  getInboundById,
-  updateInbound,
-  deleteInbound,
-} = require("../controllers/inboundController");
+const { createInbound, getAllInbounds, getInboundById, updateInbound, deleteInbound } = require("../controllers/inboundController");
 
 const router = express.Router();
 

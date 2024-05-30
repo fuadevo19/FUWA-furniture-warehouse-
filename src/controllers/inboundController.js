@@ -38,15 +38,7 @@ exports.createInbound = async (req, res) => {
         {
           model: Product,
           through: {
-            attributes: [
-              "quantity",
-              "name",
-              "description",
-              "sku",
-              "size",
-              "weight",
-              "zone",
-            ],
+            attributes: ["quantity", "name", "description", "sku", "size", "weight", "zone"],
           },
         },
       ],
@@ -68,15 +60,7 @@ exports.getAllInbounds = async (req, res) => {
         {
           model: Product,
           through: {
-            attributes: [
-              "quantity",
-              "name",
-              "description",
-              "sku",
-              "size",
-              "weight",
-              "zone",
-            ],
+            attributes: ["quantity", "name", "description", "sku", "size", "weight", "zone"],
           },
         },
       ],
@@ -101,15 +85,7 @@ exports.getInboundById = async (req, res) => {
         {
           model: Product,
           through: {
-            attributes: [
-              "quantity",
-              "name",
-              "description",
-              "sku",
-              "size",
-              "weight",
-              "zone",
-            ],
+            attributes: ["quantity", "name", "description", "sku", "size", "weight", "zone"],
           },
         },
       ],
@@ -165,9 +141,7 @@ exports.updateInbound = async (req, res) => {
     });
     await Promise.all(
       existingInboundProducts.map(async (inboundProduct) => {
-        const existingProduct = await Product.findByPk(
-          inboundProduct.ProductId
-        );
+        const existingProduct = await Product.findByPk(inboundProduct.ProductId);
         existingProduct.stock -= inboundProduct.quantity;
         await existingProduct.save();
       })
@@ -202,15 +176,7 @@ exports.updateInbound = async (req, res) => {
         {
           model: Product,
           through: {
-            attributes: [
-              "quantity",
-              "name",
-              "description",
-              "sku",
-              "size",
-              "weight",
-              "zone",
-            ],
+            attributes: ["quantity", "name", "description", "sku", "size", "weight", "zone"],
           },
         },
       ],

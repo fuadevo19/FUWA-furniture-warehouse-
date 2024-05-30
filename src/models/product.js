@@ -1,9 +1,9 @@
-const { DataTypes, UUIDV4 } = require("sequelize")
-const sequelize = require("../config/database")
-const { v4: uuidv4 } = require("uuid")
+const { DataTypes, UUIDV4 } = require("sequelize");
+const sequelize = require("../config/database");
+const { v4: uuidv4 } = require("uuid");
 
 const Product = sequelize.define(
-  "products",
+  "Products",
   {
     id: {
       type: DataTypes.UUID,
@@ -44,6 +44,6 @@ const Product = sequelize.define(
   {
     freezeTableName: true,
   }
-)
+);
 
-module.exports = Product
+module.exports = Product;
