@@ -2,6 +2,7 @@ const { Inbound, InboundProduct } = require("../models/inbound");
 const Product = require("../models/product");
 
 exports.createInbound = async (req, res) => {
+  console.log(req.body);
   const { datetime, reference_number, supplier_id, products } = req.body;
 
   try {

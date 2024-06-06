@@ -8,7 +8,6 @@ const Product = sequelize.define(
     id: {
       type: DataTypes.UUID,
       defaultValue: uuidv4,
-      autoIncrement: true,
       primaryKey: true,
     },
     name: {
