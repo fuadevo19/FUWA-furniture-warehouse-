@@ -4,6 +4,10 @@ const Product = require("../models/product");
 const Outbound = require("../models/outbound")(sequelize);
 const OutboundProduct = require("../models/outboundProduct")(sequelize);
 
+// Define associations
+Outbound.hasMany(OutboundProduct, { foreignKey: "outbound_id" });
+OutboundProduct.belongsTo(Product, { foreignKey: "product_id" });
+
 const createOutbound = async (req, res) => {
   const { datetime, customer_id, customer_name, customer_address, customer_number, status, products } = req.body;
 
@@ -50,6 +54,29 @@ const createOutbound = async (req, res) => {
   }
 };
 
+const getOutbounds = async (req, res) => {
+  try {
+    const outbounds = await Outbound.findAll({
+      include: [
+        {
+          model: OutboundProduct,
+          include: [
+            {
+              model: Product,
+              attributes: ["id", "name", "description", "sku", "weight", "size", "zone"],
+            },
+          ],
+        },
+      ],
+    });
+
+    res.status(200).json(outbounds);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error", error: error.message });
+  }
+};
+
 module.exports = {
   createOutbound,
+  getOutbounds,
 };
