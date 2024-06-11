@@ -76,6 +76,33 @@ const getOutbounds = async (req, res) => {
   }
 };
 
+const getOutboundById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const outbound = await Outbound.findByPk(id, {
+      include: [
+        {
+          model: OutboundProduct,
+          include: [
+            {
+              model: Product,
+              attributes: ["id", "name", "description", "sku", "weight", "size", "zone"],
+            },
+          ],
+        },
+      ],
+    });
+
+    if (!outbound) {
+      return res.status(404).json({ message: "Outbound not found" });
+    }
+
+    res.status(200).json(outbound);
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error", error: error.message });
+  }
+};
+
 const updateOutboundStatus = async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
@@ -98,5 +125,6 @@ const updateOutboundStatus = async (req, res) => {
 module.exports = {
   createOutbound,
   getOutbounds,
+  getOutboundById,
   updateOutboundStatus,
 };

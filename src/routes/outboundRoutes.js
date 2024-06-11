@@ -6,4 +6,5 @@ const outboundController = require("../controllers/outboundController");
 router.post("/outbound", outboundController.createOutbound);
 router.get("/outbound", outboundController.getOutbounds);
 router.patch("/outbound/:id", outboundController.updateOutboundStatus);
+router.get("/outbound/:id", outboundController.getOutboundById);
 module.exports = router;
