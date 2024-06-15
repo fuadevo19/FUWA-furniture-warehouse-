@@ -3,7 +3,7 @@ const Product = require("../models/product");
 
 const countStockLevels = async () => {
   try {
-    const BarangTersedia = await Product.count({
+    const barang_tersedia = await Product.count({
       where: {
         stock: {
           [Op.gt]: 10,
@@ -11,7 +11,7 @@ const countStockLevels = async () => {
       },
     });
 
-    const BarangHampirHabis = await Product.count({
+    const barang_hampir_habis = await Product.count({
       where: {
         stock: {
           [Op.lte]: 10,
@@ -19,16 +19,16 @@ const countStockLevels = async () => {
       },
     });
 
-    const BarangHabis = await Product.count({
+    const barang_habis = await Product.count({
       where: {
         stock: 0,
       },
     });
 
     return {
-      BarangTersedia,
-      BarangHampirHabis,
-      BarangHabis,
+      barang_tersedia,
+      barang_hampir_habis,
+      barang_habis,
     };
   } catch (error) {
     console.error("Error counting products with stock levels:", error);
